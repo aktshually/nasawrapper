@@ -1,0 +1,9 @@
+{
+    "python.analysis.extraPaths": [
+        "./lib/Python/"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.pycodestyleEnabled": false
+}
