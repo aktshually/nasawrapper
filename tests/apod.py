@@ -1,4 +1,4 @@
-from src.nasawrapper.main import Apod
+from src.main import Apod
 from pprint import pprint
 
 apod = Apod("DEMO_KEY")

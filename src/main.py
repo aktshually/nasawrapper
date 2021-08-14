@@ -9,7 +9,7 @@ class Apod:
         self.__api_key = api_key
         self.__date_format = r"\d{4}-\d{2}-\d{2}"
         self.__allowed_keys = ["date", "start_date", "end_date",
-                              "count", "thumbs", "hd"]
+                              "count", "thumbs"]
         self.__logging = logging
         self.__date_keys = ["date", "start_date", "end_date"]
 
