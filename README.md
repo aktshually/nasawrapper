@@ -1,6 +1,6 @@
 ## Warnings
-This library is not ready yet, please report bugs at issues tab.
-**This library does not have any directly relationship to NASA, this is just a wrapper for make requests to their APIs easier**
+This library is not ready yet, please report bugs at issues tab. <br>
+**This library does not have any directly relationship to NASA, this is just a wrapper for make requests to their APIs easier.**
 
 ## Instalation
 You can install this package by pip using the following command:
