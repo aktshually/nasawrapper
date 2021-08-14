@@ -1,9 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "./lib/Python/"
+        "./lib/Python/nasawrapper"
     ],
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.linting.mypyEnabled": false,
-    "python.linting.pycodestyleEnabled": false
 }

@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", encoding="utf-8") as rm:
     readme = rm.read()
@@ -6,9 +6,9 @@ with open("README.md", encoding="utf-8") as rm:
 setup(
     name="nasawrapper",
     author="End313234",
-    url="https://github.com/End313234/nasawrapper",
+    url="https://github.com/End313234/nasawrapper-python",
     project_urls={
-        "Bug Hunter": "https://github.com/End313234/nasawrapper/issues"
+        "Bug Hunter": "https://github.com/End313234/nasawrapper-python/issues"
     },
     version="0.0.1",
     license="MIT",
@@ -24,5 +24,5 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Internet"
     ],
-    package_dir={"": "src"}
+    packages=find_packages()
 )

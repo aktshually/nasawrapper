@@ -1,8 +1,8 @@
-from src.main import Apod
+from nasawrapper import Apod
 from pprint import pprint
 
 apod = Apod("DEMO_KEY")
 pprint(apod.get_apod({
-    "thumbs": False,
-    "count": 2
+    "start_date": "2015-10-05",
+    "end_date": "2015-10-06"
 }))
