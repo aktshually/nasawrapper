@@ -1,3 +1,14 @@
+## Instalation
+You can install this package by pip using the following command:
+```
+pip install nasawrapper
+```
+
+## Updating package
+```
+pip install --upgrade nasawrapper
+```
+
 ## Documentation
 
 ### APOD
