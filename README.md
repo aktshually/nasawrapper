@@ -40,7 +40,7 @@ For using it, you have to provide a single parameter (a dict) with some keys wit
 |  Parameter  |  Function  | Type |
 |-------------|------------|------|
 |     date    | The date of the APOD image to retrieve (must be in format YYYY-MM-DD) | datetime.datetime |
-|  start_date | The start of a date range, when requesting date for a range of dates. Cannot be used with `date` (must be in format YYYY-MM-DD).| datetime.datetime |
+|  start_date | The start of a date range, when requesting date for a range of dates. Cannot be used with `date` (must be in format YYYY-MM-DD). Also, can not be before Jun 16, 1995.| datetime.datetime |
 |  end_date   | The end of the date range, when used with `start_date`. Can not be used without `start_date` and can not be after `start_date` (must be in format YYYY-MM-DD). | datetime.datetime |
 | count | 	If this is specified then count randomly chosen images will be returned. Cannot be used with `date` or `start_date` and `end_date`. | int
 | thumbs | Return the URL of video thumbnail. If an APOD is not a video, this parameter is ignored. | bool |
