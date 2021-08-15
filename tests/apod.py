@@ -1,8 +1,9 @@
 from nasawrapper import Apod
 from pprint import pprint
+from datetime import datetime
 
 apod = Apod("DEMO_KEY")
 pprint(apod.get_apod({
-    "start_date": "2015-10-05",
-    "end_date": "2015-10-06"
+    "start_date": datetime(year=2021, month=7, day=10),
+    "end_date": datetime(year=2021, month=7, day=11)
 }))

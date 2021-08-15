@@ -9,7 +9,7 @@ class Apod:
         self.__api_key = api_key
         self.__date_format = r"\d{4}-\d{2}-\d{2}"
         self.__allowed_keys = ["date", "start_date", "end_date",
-                              "count", "thumbs"]
+                               "count", "thumbs"]
         self.__logging = logging
         self.__date_keys = ["date", "start_date", "end_date"]
 
@@ -35,8 +35,8 @@ class Apod:
         """
 
         url = f"https://api.nasa.gov/planetary/apod?api_key={self.__api_key}"
-        checks = ["end_date" in options.keys(), "start_date" in options.keys(), "date" in options.keys()]
-        _format = "%Y-%m-%d"
+        checks = ["end_date" in options.keys(
+        ), "start_date" in options.keys(), "date" in options.keys()]
 
         # throw warning
         if "thumbs" in options.keys() and self.__logging:
@@ -49,37 +49,44 @@ class Apod:
                 Check the documentation for more information.""")
 
         if len([option for option in options.keys() if option not in self.__allowed_keys]) > 0:
-            raise ValueError("Use only properties described in the documentation (https://github.com/End313234/nasawrapper-python#documentation).")
+            raise ValueError(
+                "Use only properties described in the documentation (https://github.com/End313234/nasawrapper-python#documentation).")
 
         # check values to make sure they are valid and have a specific type
         if checks[0] and not checks[1]:
             raise ValueError("'end_date' can not be used without 'start_date'")
 
-        for key, value in options.items():
-            if key in self.__date_keys:
-                if not isinstance(value, str):
-                    raise TypeError(f"'{key}' must be a string.")
+        for key in self.__date_keys:
+            if key in options.keys():
+                value = options[key]
+                if not isinstance(value, datetime):
+                    raise TypeError(f"'{key}' must be datetime.datetime")
 
-                if re.search(self.__date_format, value) is None:
-                    raise ValueError(f"'{key}' must be in YYYY-MM-DD format.")
-                
-                try:
-                    assert not datetime.strptime(value, _format) > datetime.now()
-                except (ValueError, AssertionError):
+                if value > datetime.now():
                     raise ValueError(f"'{key}' must be a valid date.")
 
+        for key, value in options.items():
             if key == "count" and not isinstance(value, int):
                 raise TypeError(f"'{key}' must be an integer.")
 
             if key == "thumbs" and not isinstance(value, bool):
                 raise TypeError(f"'{key}' must be a boolean.")
 
-            if key == "end_date" and datetime.strptime(options["start_date"], _format) > datetime.strptime(options["end_date"], _format):
-                raise ValueError(f"'{key}' can not be after 'start_date'")
+            if key == "end_date":
+                start_date = options["start_date"]
+                if value < datetime(year=1995, month=6, day=16):
+                    raise ValueError("'end_date' must be after Jun 16, 1995.")
+
+                if value < options["start_date"]:
+                    raise ValueError(f"'{key}' can not be before 'start_date'")
+                    
+                options["end_date"] = f"{value.year}-{value.month}-{value.day}"
+                options["start_date"] = f"{start_date.year}-{start_date.month}-{start_date.day}"
 
         if "count" in options.keys() and any(checks):
-            raise ValueError(f"'count' can not be used with 'end_date', 'start_date' or 'date'")
-        
+            raise ValueError(
+                f"'count' can not be used with 'end_date', 'start_date' or 'date'")
+
         if "start_date" in options.keys() and checks[2]:
             raise ValueError(f"'start_date' can not be used with 'date'")
 
