@@ -7,13 +7,13 @@ Every API used in this library is avaliable on [NASA API portal](https://api.nas
 The documentation provided on this readme has inspiration on the documentation provided on the [NASA API portal](https://api.nasa.gov/) about their APIs.
 
 ## Instalation
-You can install this package by PIP using the following command:
+You can install this package by [PIP](https://pip.pypa.io/en/stable/) using the following command:
 ```
 pip install nasawrapper
 ```
 
 ## Updating package
-Updating package using pip:
+Updating package using [PIP](https://pip.pypa.io/en/stable/):
 ```
 pip install --upgrade nasawrapper
 ```
