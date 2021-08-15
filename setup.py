@@ -8,14 +8,15 @@ setup(
     author="End313234",
     url="https://github.com/End313234/nasawrapper-python",
     project_urls={
-        "Bug Hunter": "https://github.com/End313234/nasawrapper-python/issues"
+        "Bug Hunter": "https://github.com/End313234/nasawrapper-python/issues",
+        "Documentation": "https://github.com/End313234/nasawrapper-python#documentation"
     },
-    version="0.0.2",
+    version="0.0.3",
     license="MIT",
     description="A wrapper for NASA APIs",
     long_description=readme,
     long_description_content_type="text/markdown",
-    python_requires=">=3.8.0",
+    python_requires=">=3.6.0",
     classifiers=[
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.8",

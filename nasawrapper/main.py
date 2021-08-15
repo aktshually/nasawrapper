@@ -49,7 +49,7 @@ class Apod:
                 Check the documentation for more information.""")
 
         if len([option for option in options.keys() if option not in self.__allowed_keys]) > 0:
-            raise ValueError("Use only properties described in the documentation (link)")
+            raise ValueError("Use only properties described in the documentation (https://github.com/End313234/nasawrapper-python#documentation).")
 
         # check values to make sure they are valid and have a specific type
         if checks[0] and not checks[1]:
