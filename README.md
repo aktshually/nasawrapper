@@ -97,6 +97,7 @@ The class responsable for this API has a method called `get_neo_feed`. To use it
 |-------------|----------|------|
 | start_date | Starting date for asteroid search | datetime.datetime |
 | end_date | Ending date for asteroid search. The limit is 7 days from the 'start_date' and it is set to 7 days from 'start_date' by default. | datetime.datetime |
+
 Examples:
 ```py
 from nasawrapper import NeoWs
