@@ -127,6 +127,9 @@ class NeoWs:
             if not isinstance(value, datetime):
                 raise ValueError(f"{key} must be 'datetime.datetime'")
 
+        if options.get("end_date") == None:
+            options["end_date"] = options["start_date"] + timedelta(days=7)
+        
         if options["end_date"] > options["start_date"] + timedelta(days=7):
             raise ValueError(f"'end_date' must be before/equal to 7 days from 'start_date'.")
 
