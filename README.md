@@ -49,18 +49,24 @@ You can not provide any other parameters, or an error will be thrown. <br>
 Examples:
 ```py
 from nasawrapper import Apod
+from datetime import datetime
 
 apod = Apod("your-api-key", False)
 
 # fetching data between two dates
 print(apod.get_apod({
-    "start_date": "2020-10-10",
-    "end_date": "2020-10-11",
+    "start_date": datetime(year=2020, month=10, day=10),
+    "end_date": datetime(year=2020, month=10, day=11),
     "thumbs": True
 }))
 
-# fetch specific number of data
+# fetching specific number of data
 print(apod.get_apod({
     "count": 5
+}))
+
+# fetching data from specific date
+print(apod.get_apod({
+    "date": datetime(year=2020, month=10, day=12)
 }))
 ```
