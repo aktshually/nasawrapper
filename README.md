@@ -120,7 +120,7 @@ print(neows.get_neo_feed({
 #### Neo - Lookup
 - TODO
 
-### Neo - Browse
+#### Neo - Browse
 - TODO
 
 ## Where can I get an API key
