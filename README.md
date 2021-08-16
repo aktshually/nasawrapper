@@ -28,7 +28,7 @@ pip install --upgrade nasawrapper
 ### APOD
 
 This API has the following description in their website: "Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.". <br>
-The class responsable for this API is `Apod`, which you have to instantiate with an api key (you can get it [here](https://api.nasa.gov/)). <br>
+The class responsable for this API is `Apod`, which you have to instantiate with an api key (learn how to get [here](https://github.com/End313234/nasawrapper-python#where-can-i-get-an-api-key)). <br>
 Example:
 
 ```py
@@ -79,7 +79,7 @@ print(apod.get_apod({
 
 The [NASA API portal](https://api.nasa.gov/) describes this API as "a RESTful web service for near earth Asteroid information. With NeoWs a user can: search for Asteroids based on their closest approach date to Earth, lookup a specific Asteroid with its NASA JPL small body id, as well as browse the overall data-set.".
 
-The class responsable for this API is `NeoWs`, which you also must instantiate with an API key.
+The class responsable for this API is `NeoWs`, which you also must instantiate with an API key (learn how to get it [here](https://github.com/End313234/nasawrapper-python#where-can-i-get-an-api-key)).
 Examples:
 
 ```py
@@ -102,7 +102,7 @@ Examples:
 from nasawrapper import NeoWs
 from datetime import datetime
 
-neows = NeoWs()
+neows = NeoWs("your-api-key")
 
 # fetching from a start_date 
 print(neows.get_neo_feed({
@@ -128,3 +128,8 @@ To get an API key, access the [NASA API portal](https://api.nasa.gov/) and click
 After clicking on "Signup", you should receive an email on the email address provided with your API key. Then you are ready to use your API key acording to the rate limit (hourlt limit for API keys is 1000 requests).
 
 You can also use a `DEMO_KEY` instead a real API key, however, it has more restricted limits (30 requests per IP address per hour and 50 requests per IP address per day).
+
+## Why you shouldu use this wrapper
+- More readable code;
+- No long URLs;
+- You have absolutely sure about the output: if the code runs without any errors, the output will be the API response about what you want.
