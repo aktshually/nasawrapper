@@ -11,7 +11,7 @@ setup(
         "Bug Hunter": "https://github.com/End313234/nasawrapper-python/issues",
         "Documentation": "https://github.com/End313234/nasawrapper-python#documentation"
     },
-    version="0.0.5",
+    version="0.1.0",
     license="MIT",
     description="A wrapper for NASA APIs",
     long_description=readme,
@@ -23,7 +23,8 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Natural Language :: English",
         "Intended Audience :: Developers",
-        "Topic :: Internet"
+        "Topic :: Internet",
+        "Development Status :: 3 - Alpha"
     ],
     packages=find_packages()
 )
