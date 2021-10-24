@@ -32,8 +32,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.autosectionlabel",
-    "sphinx_rtd_dark_mode"
+    "sphinx.ext.autosectionlabel"
 ]
 
 
@@ -60,7 +59,6 @@ exclude_patterns = []
 #
 html_theme = 'sphinx_rtd_theme'
 highlight_language = "batch"
-default_dark_mode = False
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
