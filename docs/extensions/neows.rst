@@ -1,4 +1,4 @@
-.. currentmodule:: nasawrapper
+.. currentmodule:: nasawrapper.neows
 
 NeoWs
 =====
