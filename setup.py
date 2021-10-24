@@ -13,7 +13,7 @@ setup(
     url="https://github.com/End313234/nasawrapper-python",
     project_urls={
         "Bug Hunter": "https://github.com/End313234/nasawrapper/issues",
-        "Documentation": "https://github.com/End313234/nasawrapper#documentation"
+        "Documentation": "https://nasawrapper.readthedocs.io/en/latest/"
     },
     version="0.3.1",
     license="MIT",
