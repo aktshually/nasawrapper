@@ -9,6 +9,7 @@ _build
 
 # tests
 *.tests.py
+tests
 
 # others
 scripts.json

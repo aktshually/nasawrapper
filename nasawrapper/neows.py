@@ -199,8 +199,22 @@ class SyncNeoWs:
     the `NASA API Portal <https://api.nasa.gov/>`_.
     """
     def __init__(self, api_key: str) -> None:
-        self.api_key = api_key
-        self.allowed_keys = ["start_date", "end_date"]
+        self._api_key = api_key
+        self._allowed_keys = ["start_date", "end_date"]
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def allowed_keys(self):
+        """
+        Returns the allowed keys in list format.
+        """
+        return self._allowed_keys
 
     def get_neo_feed(self, options: Dict[str, Any]) -> NeoWsFeedResponse:
         """
@@ -231,8 +245,8 @@ class SyncNeoWs:
                 })
         """
 
-        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self.api_key}"
-        options = Validator.validate(options, self.allowed_keys)
+        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self._api_key}"
+        options = Validator.validate(options, self._allowed_keys)
 
         # building url
         for key, value in options.items():
@@ -243,7 +257,7 @@ class SyncNeoWs:
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
 
@@ -291,7 +305,7 @@ class SyncNeoWs:
         if not isinstance(asteroid_id, int):
             raise TypeError(f"'asteroid_id' must be 'int', got {asteroid_id.__class__.__name__}")
 
-        url = f"https://api.nasa.gov/neo/rest/v1/neo/{asteroid_id}?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/neo/rest/v1/neo/{asteroid_id}?api_key={self._api_key}"
         
 
         # making request
@@ -301,7 +315,7 @@ class SyncNeoWs:
         elif request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
 
@@ -320,14 +334,14 @@ class SyncNeoWs:
                                                 # since the API's searching for all asteroids
                 print(result)
         """
-        url = f"https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={self._api_key}"
 
         # making request
         request = requests.get(url)
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
 
@@ -341,8 +355,22 @@ class AsyncNeoWs:
     the `NASA API Portal <https://api.nasa.gov/>`_.
     """
     def __init__(self, api_key: str) -> None:
-        self.api_key = api_key
-        self.allowed_keys = ["start_date", "end_date"]
+        self._api_key = api_key
+        self._allowed_keys = ["start_date", "end_date"]
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def allowed_keys(self):
+        """
+        Returns the allowed keys in list format.
+        """
+        return self._allowed_keys
 
     async def get_neo_feed(self, options: Dict[str, Any]) -> NeoWsFeedResponse:
         """
@@ -369,8 +397,8 @@ class AsyncNeoWs:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(main())
         """
-        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self.api_key}"
-        options = Validator.validate(options, self.allowed_keys)
+        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self._api_key}"
+        options = Validator.validate(options, self._allowed_keys)
 
         # building url
         for key, value in options.items():
@@ -382,7 +410,7 @@ class AsyncNeoWs:
                 if request.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif request.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
                 request = await request.json()
 
@@ -446,7 +474,7 @@ class AsyncNeoWs:
         if not isinstance(asteroid_id, int):
             raise TypeError(f"'asteroid_id' must be 'int', got {asteroid_id.__class__.__name__}")
 
-        url = f"https://api.nasa.gov/neo/rest/v1/neo/{asteroid_id}?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/neo/rest/v1/neo/{asteroid_id}?api_key={self._api_key}"
         
         # making request
         async with aiohttp.ClientSession() as session:
@@ -454,7 +482,7 @@ class AsyncNeoWs:
                 if request.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif request.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
                 elif request.status == 404:
                     raise NotFound(f"Asteroid of id '{asteroid_id}' could not be found")
 
@@ -482,7 +510,7 @@ class AsyncNeoWs:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(main())
         """
-        url = f"https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/neo/rest/v1/neo/browse?api_key={self._api_key}"
 
         # making request
         async with aiohttp.ClientSession() as session:
@@ -490,7 +518,7 @@ class AsyncNeoWs:
                 if request.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif request.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
                 request = await request.json()
 
@@ -516,8 +544,22 @@ class NeoWsQueryBuilder:
             print(result)
     """
     def __init__(self, api_key: str, options = {}) -> None:
-        self.api_key = api_key
-        self.options = options
+        self._api_key = api_key
+        self._options = options
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def options(self):
+        """
+        Returns the options in dict format.
+        """
+        return self._api_key
 
     def set_start_date(self, start_date: datetime):
         """
@@ -526,8 +568,8 @@ class NeoWsQueryBuilder:
         if not isinstance(start_date, datetime):
             raise TypeError(f"'start_date' must be 'datetime.datetime', got {start_date.__class.__name__}")
 
-        self.options["start_date"] = start_date   
-        return NeoWsQueryBuilder(self.api_key, self.options)     
+        self._options["start_date"] = start_date   
+        return NeoWsQueryBuilder(self._api_key, self._options)     
 
     def set_end_date(self, end_date: datetime):
         """
@@ -536,17 +578,17 @@ class NeoWsQueryBuilder:
         if not isinstance(end_date, datetime):
             raise TypeError(f"'end_date' must be 'datetime.datetime', got {end_date.__class.__name__}")
 
-        self.options["end_date"] = end_date 
-        return NeoWsQueryBuilder(self.api_key, self.options)
+        self._options["end_date"] = end_date 
+        return NeoWsQueryBuilder(self._api_key, self._options)
 
     def get_feed(self):
         """
         Make the request with the provided
         information.
         """
-        options = Validator.validate(self.options, ["start_date", "end_date"])
+        options = Validator.validate(self._options, ["start_date", "end_date"])
         
-        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/neo/rest/v1/feed?api_key={self._api_key}"
 
         # building url
         for key, value in options.items():
@@ -557,6 +599,6 @@ class NeoWsQueryBuilder:
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()

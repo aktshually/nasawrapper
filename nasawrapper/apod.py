@@ -97,16 +97,44 @@ class SyncApod:
         **api_key** (str) - The API key.
     """
     def __init__(self, api_key: str) -> None:
-        self.api_key = api_key
-        self.allowed_keys = {
+        self._api_key = api_key
+        self._allowed_keys = {
             "date": datetime,
             "start_date": datetime,
             "end_date": datetime,
             "count": int,
             "thumbs": bool
         }
-        self.date_related_keys = list(filter(lambda item: "date" in item, self.allowed_keys.keys()))
-        self.base_url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}"
+        self._date_related_keys = list(filter(lambda item: "date" in item, self._allowed_keys.keys()))
+        self._base_url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}"
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def allowed_keys(self):
+        """
+        Returns the allowed keys in a dict.
+        """
+        return self._allowed_keys
+
+    @property
+    def date_related_keys(self):
+        """
+        Returns the allowed keys in a dict.
+        """
+        return self._date_related_keys
+
+    @property
+    def base_url(self):
+        """
+        Returns the base URL.
+        """
+        return self._base_url
 
     def get_apod(self, options: Dict[str, Union[str, int, bool, datetime]]) -> Union[ApodResponse, List[ApodResponse]]:
         """
@@ -158,18 +186,18 @@ class SyncApod:
 
                     print(result)
         """
-        options = Validator.validate(options, self.allowed_keys, self.date_related_keys)
+        options = Validator.validate(options, self._allowed_keys, self._date_related_keys)
 
         # building query
         for key, value in options.items():
-            self.base_url += f"&{key}={value}"
+            self._base_url += f"&{key}={value}"
 
         # making request
-        request = requests.get(self.base_url)
+        request = requests.get(self._base_url)
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
 
@@ -191,16 +219,16 @@ class SyncApod:
         But it's not recommended, since there's
         a specific method for this.
         """
-        url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}&count=1"
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}&count=1"
 
         # making request
         request = requests.get(url)
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
-        return request.json()
+        return request.json()[0]
 
     def get_today_apod(self) -> ApodResponse:
         """
@@ -224,14 +252,14 @@ class SyncApod:
         to do that.
         """
         now = datetime.now().strftime("%Y-%m-%d")
-        url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}&date={now}"
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}&date={now}"
         
         # making request
         request = requests.get(url)
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
 
@@ -249,16 +277,44 @@ class AsyncApod:
         **api_key** (str) - The API key.
     """
     def __init__(self, api_key: str) -> None:
-        self.api_key = api_key
-        self.allowed_keys = {
+        self._api_key = api_key
+        self._allowed_keys = {
             "date": datetime,
             "start_date": datetime,
             "end_date": datetime,
             "count": int,
             "thumbs": bool
         }
-        self.date_related_keys = list(filter(lambda item: "date" in item, self.allowed_keys))
-        self.base_url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}"
+        self._date_related_keys = list(filter(lambda item: "date" in item, self._allowed_keys))
+        self._base_url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}"
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def allowed_keys(self):
+        """
+        Returns the allowed keys in a dict.
+        """
+        return self._allowed_keys
+
+    @property
+    def date_related_keys(self):
+        """
+        Returns the allowed keys in a dict.
+        """
+        return self._date_related_keys
+
+    @property
+    def base_url(self):
+        """
+        Returns the base URL.
+        """
+        return self._base_url
 
     async def get_apod(self, options: Dict[str, Union[str, int, bool, datetime]]) -> Union[ApodResponse, List[ApodResponse]]:
         """
@@ -286,19 +342,19 @@ class AsyncApod:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(main())
         """
-        options = Validator.validate(options, self.allowed_keys, self.date_related_keys)
+        options = Validator.validate(options, self._allowed_keys, self._date_related_keys)
 
         # building url
         for key, value in options.items():
-            self.base_url += f"&{key}={value}"
+            self._base_url += f"&{key}={value}"
 
         # making request
         async with aiohttp.ClientSession() as session:
-            async with session.get(self.base_url) as response:
+            async with session.get(self._base_url) as response:
                 if response.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif response.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
                     
                 response = await response.json()
 
@@ -327,14 +383,14 @@ class AsyncApod:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(main())
         """
-        url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}&count=1"
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}&count=1"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif response.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
                     
                 response = await response.json()
 
@@ -364,14 +420,14 @@ class AsyncApod:
                 loop.run_until_complete(main())
         """
         now = datetime.now().strftime("%Y-%m-%d")
-        url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}&date={now}"
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}&date={now}"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status == 429:
                     raise RateLimitError("You are being rate limited")
                 elif response.status == 403:
-                    raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+                    raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
                 response = await response.json()
 
@@ -410,8 +466,22 @@ class ApodQueryBuilder:
                 print(result)
     """
     def __init__(self, api_key: str, options = {}):
-        self.api_key = api_key
-        self.options = options
+        self._api_key = api_key
+        self._options = options
+
+    @property
+    def api_key(self):
+        """
+        Returns the API key.
+        """
+        return self._api_key
+
+    @property
+    def options(self):
+        """
+        Returns the options in dict format.
+        """
+        return self._options
 
     def set_date(self, date: datetime):
         """
@@ -422,14 +492,14 @@ class ApodQueryBuilder:
 
         # checks whenever 'date' appears with
         # 'start_date' or 'count'
-        if self.options.get("start_date"):
+        if self._options.get("start_date"):
             raise InvalidKey("'date' can not be used with 'start_date'")    
-        elif self.options.get("count"):
+        elif self._options.get("count"):
             raise InvalidKey("'date' can not be used with 'count'")
 
-        self.options["date"] = date.strftime("%Y-%m-%d")
+        self._options["date"] = date.strftime("%Y-%m-%d")
 
-        return ApodQueryBuilder(self.api_key, self.options)
+        return ApodQueryBuilder(self._api_key, self._options)
 
     def set_start_date(self, start_date: datetime):
         """
@@ -441,7 +511,7 @@ class ApodQueryBuilder:
         if start_date < datetime(year=1995, month=6, day=16):
             raise InvalidDate("'end_date' must be after Jun 16, 1995.")
 
-        return ApodQueryBuilder(self.api_key, self.options)
+        return ApodQueryBuilder(self._api_key, self._options)
 
     def set_end_date(self, end_date: datetime):
         """
@@ -451,7 +521,7 @@ class ApodQueryBuilder:
         if not isinstance(end_date, datetime):
             raise TypeError(f"'end_date' must be an 'datetime.datetime', got '{end_date.__class__.__name__}'")
 
-        return ApodQueryBuilder(self.api_key, self.options)
+        return ApodQueryBuilder(self._api_key, self._options)
 
     def set_count(self, count: int):
         """
@@ -462,12 +532,12 @@ class ApodQueryBuilder:
         
         # checking whenever 'count' is being
         # used with 'date', 'start_date', 'end_date'
-        checks = ["date" in self.options.keys(), "start_date" in self.options.keys(), "end_date" in self.options.keys()]
+        checks = ["date" in self._options.keys(), "start_date" in self._options.keys(), "end_date" in self._options.keys()]
         if any(checks):
             raise InvalidKey("'count' can not be used with 'date', 'start_date' or 'end_date'")
 
-        self.options["count"] = count
-        return ApodQueryBuilder(self.api_key, self.options)
+        self._options["count"] = count
+        return ApodQueryBuilder(self._api_key, self._options)
 
     def set_thumbs(self, thumbs: bool):
         """
@@ -476,18 +546,18 @@ class ApodQueryBuilder:
         if not isinstance(thumbs, bool):
             raise TypeError(f"'thumbs' must be 'bool', got '{thumbs.__class__.__name__}'")
 
-        self.options["thumbs"] = thumbs
-        return ApodQueryBuilder(self.api_key, self.options)
+        self._options["thumbs"] = thumbs
+        return ApodQueryBuilder(self._api_key, self._options)
 
     def get_apod(self) -> Union[ApodResponse, List[ApodResponse]]:
         """
         Make the request with the provided
         information.
         """
-        url = f"https://api.nasa.gov/planetary/apod?api_key={self.api_key}"
+        url = f"https://api.nasa.gov/planetary/apod?api_key={self._api_key}"
 
         options = Validator.validate(
-            self.options,
+            self._options,
             {
             "date": datetime,
             "start_date": datetime,
@@ -507,6 +577,6 @@ class ApodQueryBuilder:
         if request.status_code == 429:
             raise RateLimitError("You are being rate limited")
         elif request.status_code == 403:
-            raise InvalidApiKey(f"'{self.api_key}' is not a valid API key")
+            raise InvalidApiKey(f"'{self._api_key}' is not a valid API key")
 
         return request.json()
