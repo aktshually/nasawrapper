@@ -1,3 +1,15 @@
+# build-related dirs
 build
 dist
-nasawrapper.egg-info
+*.egg-info
+_build
+
+# py
+__pycache__
+
+# tests
+*.tests.py
+
+# others
+scripts.json
+run.py
