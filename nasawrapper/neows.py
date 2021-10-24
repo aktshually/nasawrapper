@@ -374,6 +374,8 @@ class AsyncNeoWs:
 
     async def get_neo_feed(self, options: Dict[str, Any]) -> NeoWsFeedResponse:
         """
+        |coro|
+        
         Same this as
         :py:class:`SyncNeoWs.get_neo_feed <nasawrapper.neows.SyncNeoWs.get_neo_feed>`,
         but with asynchronous syntax.
@@ -418,6 +420,8 @@ class AsyncNeoWs:
 
     async def get_today_neo_feed(self) -> NeoWsFeedResponse:
         """
+        |coro|
+        
         Same this as
         :py:class:`SyncNeoWs.get_today_neo_feed <nasawrapper.neows.SyncNeoWs.get_today_neo_feed>`,
         but with asynchronous syntax.
@@ -447,6 +451,8 @@ class AsyncNeoWs:
 
     async def get_neo_lookup(self, asteroid_id: int) -> Asteroid:
         """
+        |coro|
+        
         Lookup a specific asteroid based on its
         NASA JPL small body (SPK-ID) ID. Find more
         about this at
@@ -492,6 +498,8 @@ class AsyncNeoWs:
 
     async def get_neo_browse(self) -> NeoWsBrowseResponse:
         """
+        |coro|
+        
         Browse the overall asteroid data-set.
 
         **Example**
