@@ -28,5 +28,3 @@ def get_remaining_rate_limit(api_key: str) -> int:
     """
     headers = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={api_key}").headers
     return int(headers["X-RateLimit-Remaining"])
-
-print(get_remaining_rate_limit("DEMO_KEY"))
