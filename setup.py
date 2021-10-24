@@ -15,9 +15,9 @@ setup(
         "Bug Hunter": "https://github.com/End313234/nasawrapper/issues",
         "Documentation": "https://github.com/End313234/nasawrapper#documentation"
     },
-    version="0.2.0",
+    version="0.2.1",
     license="MIT",
-    description="A wrapper for NASA APIs",
+    description="A simple wrapper to fetch NASA Open APIs using Python",
     long_description=readme,
     long_description_content_type="text/markdown",
     python_requires=">=3.6.0",
@@ -32,5 +32,5 @@ setup(
         "Development Status :: 3 - Alpha"
     ],
     packages=find_packages(),
-    install_required=requirements
+    install_requires=requirements
 )
