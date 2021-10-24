@@ -44,6 +44,10 @@ rst_prolog = """
 """
 autosectionlabel_prefix_document = True
 
+intersphinx_mapping = {
+    "py": ("https://docs.python.org/3", None)
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
