@@ -1,4 +1,4 @@
-.. currentmodule:: nasawrapper.apod
+.. currentmodule:: nasawrapper
 
 APOD
 ====
@@ -10,16 +10,16 @@ I know, this is amazing.
 SyncApod
 ----------------
 .. autoclass:: SyncApod
-    :members: get_apod, get_random, get_today_apod
+    :members:
 
 
 AsyncApod
 ----------------
 .. autoclass:: AsyncApod
-    :members: get_apod, get_random, get_today_apod
+    :members:
 
 
 ApodQueryBuilder
 ----------------
 .. autoclass:: ApodQueryBuilder
-    :members: set_date, set_start_date, set_end_date, set_count, set_thumbs
+    :members:
