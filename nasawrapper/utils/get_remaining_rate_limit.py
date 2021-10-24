@@ -23,7 +23,7 @@ def get_remaining_rate_limit(api_key: str) -> int:
 
             from nasawrapper.utils import get_remaining_rate_limit
 
-            remaining = get_remaining_rate_limit()
+            remaining = get_remaining_rate_limit("DEMO_KEY")
             print(reamining)
     """
     headers = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={api_key}").headers
