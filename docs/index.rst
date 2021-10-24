@@ -56,3 +56,10 @@ Getting Help
 
    extensions/apod
    extensions/neows
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: utils
+
+   extensions/utils
