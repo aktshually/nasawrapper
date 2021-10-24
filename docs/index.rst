@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. currentmodule:: nasawrapper
+
 Welcome to nasawrapper!
 =======================================
 
@@ -29,7 +31,7 @@ Once you done that, you're ready to start coding!
 
 Getting An API Key
 ========================================
-In documentation examples, I use ``DEMO_KEY``  API KEY. Acording to the `Portal <https://api.nasa.gov/>`_, use this API
+In documentation examples, I use ``DEMO_KEY``  API key. Acording to the `Portal <https://api.nasa.gov/>`_, use this API
 key is a good way to start exploring the APIs, however, this special API key has much lower 
 rate limits (hourly limit: 30 requests per IP address per hour; daily limit: 50 requests per IP address per day) so I also
 encourage you to sign up and get an API key. You can sign up in the `NASA API Portal <https://api.nasa.gov/>`_.
@@ -42,6 +44,18 @@ Linting
 ========================================
 For a better linting, it's highly recommended to use `Visual Studio Code <https://code.visualstudio.com/>`_ or 
 `Pycharm <https://www.jetbrains.com/pycharm/>`_ and `Pyright <https://github.com/Microsoft/pyright>`_
+
+Summary
+========================================
+* :doc:`APOD </extensions/apod>`
+    * :py:class:`SyncApod <apod.SyncApod>`
+    * :py:class:`AsyncApod <apod.AsyncApod>`
+    * :py:class:`ApodQueryBuilder <apod.ApodQueryBuilder>`
+
+* :doc:`NeoWs </extensions/neows>`
+    * :py:class:`SyncNeoWs <neows.SyncNeoWs>`
+    * :py:class:`AsyncNeoWs <neows.AsyncNeoWs>`
+    * :py:class:`NeoWsQueryBuilder <neows.NeoWsQueryBuilder>`
 
 Getting Help
 ========================================
