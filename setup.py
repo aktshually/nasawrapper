@@ -10,12 +10,12 @@ with open("requirements.txt") as f:
 setup(
     name="nasawrapper",
     author="End313234",
-    url="https://github.com/End313234/nasawrapper-python",
+    url="https://github.com/End313234/nasawrapper",
     project_urls={
         "Bug Hunter": "https://github.com/End313234/nasawrapper/issues",
         "Documentation": "https://nasawrapper.readthedocs.io/en/latest/"
     },
-    version="0.3.1",
+    version="0.3.2",
     license="MIT",
     description="A simple wrapper to fetch NASA Open APIs using Python",
     long_description=readme,
